@@ -23,7 +23,7 @@ def weights_init_normal(m):
 
 
 def train(train_loader: DataLoader, eval_loader: DataLoader, model: nn.Module, epochs, acumulate_grad_steps=50,
-          lr=1e-3, lr_decay=0.9, weight_decay=1e-7, model_type='basic', evaluating=False):
+          lr=1e-3, lr_decay=0.9, weight_decay=1e-7, model_type='basic', evaluating=False) -> dict:
     """
     :param train_loader: train data loader
     :param eval_loader: validation data loader. If we are training on validation set will be None
@@ -75,7 +75,7 @@ def train(train_loader: DataLoader, eval_loader: DataLoader, model: nn.Module, e
     return stats
 
 
-def train_epoch(data_loader, model, optimizer, scheduler, acumulate_grad_steps, epoch, type_model='basic'):
+def train_epoch(data_loader, model, optimizer, scheduler, acumulate_grad_steps, epoch, type_model='basic') -> Tuple[float, float]:
     train_UAS, printable_loss = 0, 0
     loss_function = nn.CrossEntropyLoss().to(device)
     data_loader.dataset.__setattr__('training', True)
